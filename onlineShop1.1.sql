@@ -30,11 +30,11 @@ INSERT INTO `admin` (`a_id`, `a_pass`) VALUES
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE IF NOT EXISTS `brand` (
   `bname` varchar(18) COLLATE utf8mb4_general_ci NOT NULL,
-  `b_id` int NOT NULL,
+  `b_id` int NOT NULL AUTO_INCREMENT,
   `b_addr` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `b_email` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`b_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.brand 的資料：~5 rows (近似值)
 DELETE FROM `brand`;
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- 正在傾印表格  onlineshop.customer 的資料：~2 rows (近似值)
 DELETE FROM `customer`;
 INSERT INTO `customer` (`c_id`, `c_password`, `cname`, `addr`, `c_email`, `c_birth`) VALUES
-	('chang003', 'password1', '張三', '苗栗縣', 'chang003@gmail.com', NULL),
+	('chang003', 'pass1', '張三', '苗栗縣', 'chang003@gmail.com', NULL),
 	('lee4', 'password2', '李四', NULL, NULL, NULL);
 
 -- 傾印  資料表 onlineshop.item 結構
@@ -79,44 +79,49 @@ CREATE TABLE IF NOT EXISTS `item` (
   KEY `t_id` (`t_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`b_id`) REFERENCES `brand` (`b_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `type` (`t_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.item 的資料：~7 rows (近似值)
 DELETE FROM `item`;
 INSERT INTO `item` (`i_id`, `i_name`, `i_price`, `i_quantity`, `b_id`, `t_id`, `i_pict`, `description`) VALUES
 	(1, 'NB休閒鞋', 100, 10, 1, 1, NULL, NULL),
-	(2, 'NB運動鞋', 160, 3, 1, 1, NULL, NULL),
-	(3, 'NB運動上衣', 200, 3, 1, 2, NULL, NULL),
+	(2, 'NIKE 休閒鞋', 500, 5, 2, 1, '123', '456'),
+	(3, 'NB運動上衣', 200, 100, 1, 2, NULL, NULL),
 	(4, 'NIKE跑鞋', 500, 6, 2, 1, NULL, NULL),
 	(5, 'NIKE 運動褲', 400, 3, 2, 3, NULL, NULL),
 	(6, 'Intel Core i5-13400F', 10000, 2, 4, 4, NULL, NULL),
-	(7, 'Intel Core i5-13600KF 中央處理器 盒裝', 12000, 2, 4, 4, NULL, NULL);
+	(7, 'Intel Core i5-13600KF 中央處理器 盒裝', 12000, 2, 4, 4, NULL, NULL),
+	(8, 'NB休閒褲子', 500, 8, 1, 3, NULL, NULL);
 
 -- 傾印  資料表 onlineshop.record 結構
 DROP TABLE IF EXISTS `record`;
 CREATE TABLE IF NOT EXISTS `record` (
-  `r_id` int NOT NULL,
+  `r_id` int NOT NULL AUTO_INCREMENT,
   `item_id` int NOT NULL,
   `quantity` int NOT NULL,
   `cus_id` varchar(8) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_price` int NOT NULL,
   `r_time` timestamp NOT NULL,
   PRIMARY KEY (`r_id`),
   KEY `item_id` (`item_id`),
   KEY `cus_id` (`cus_id`),
   CONSTRAINT `record_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`i_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `record_ibfk_2` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在傾印表格  onlineshop.record 的資料：~0 rows (近似值)
+-- 正在傾印表格  onlineshop.record 的資料：~2 rows (近似值)
 DELETE FROM `record`;
+INSERT INTO `record` (`r_id`, `item_id`, `quantity`, `cus_id`, `r_price`, `r_time`) VALUES
+	(1, 1, 1, 'chang003', 100, '2023-06-04 12:41:07'),
+	(2, 4, 1, 'lee4', 500, '2023-06-04 12:43:39');
 
 -- 傾印  資料表 onlineshop.type 結構
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
   `tname` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `t_id` int NOT NULL,
+  `t_id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.type 的資料：~5 rows (近似值)
 DELETE FROM `type`;
