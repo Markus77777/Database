@@ -32,7 +32,7 @@ WHERE c_id='?';
 
 
 //側邊欄位
-//顯示商品種類
+//顯示所有商品種類
 SELECT DISTINCT t_name
 FROM `type` 
 WHERE 1;
@@ -40,12 +40,12 @@ WHERE 1;
 //種類(t_id=?)--->顯示品牌
 SELECT DISTINCT b.bname
 FROM `type` AS t,`item` AS i,`brand` AS b
-WHERE t.t_id AND i.t_id=t.t_id AND i.b_id=b.b_id; 
+WHERE t.t_id=? AND i.t_id=t.t_id AND i.b_id=b.b_id; 
 
 //種類(t_id=?)--->品牌(b_id=?)--->顯示商品
 SELECT i.i_name,i.i_price, i.i_quantity
 FROM `type` AS t,  `item` AS i,  `brand` AS b
-WHERE t.t_id='?' AND b.b_id='?' AND i.t_id=t.t_id AND i.b_id=b.b_id; 
+WHERE t.t_id=? AND b.b_id=? AND i.t_id=t.t_id AND i.b_id=b.b_id; 
 
 新增訂單
 INSERT INTO `record` (`item_id`, `quantity`, `cus_id`, `r_price`, `r_time`)
