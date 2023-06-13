@@ -4,6 +4,18 @@ const tblName = "item";
 
 const Item = {
     tblName: tblName,
+    //顯示全部商品
+    getAll: async() => {
+        try {
+            const sql = `SELECT * from ${tblName} `;
+            const [rs,flds] = await myConnection.query(sql);
+            return rs;
+        }catch (err) {
+            console.log(err);
+            return null;
+        }
+    },
+
    //新增商品
     addMerchant: async(oData) => {
         try {

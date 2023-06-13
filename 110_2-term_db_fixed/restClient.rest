@@ -6,6 +6,10 @@ GET http://localhost:5000/api/members/sidebar/2
 #####顯示商品種類+品牌包含的商品
 GET http://localhost:5000/api/members/sidebar/2/2
 
+
+###顯示所有商品
+GET http://localhost:5000/api/members/item
+
 ####搜尋商品
 GET http://localhost:5000/api/members/itemName/RTX
 

@@ -42,7 +42,15 @@ router.get('/sidebar/:type/:brand' , async(req, res) => {
 
 //=============================================================================
 //ITEM區
-
+//
+router.get('/item', async(req, res) =>{
+    try{
+        let rs = await Item.getAll();
+        res.json(rs);
+    } catch(err){
+        res.status(400).json({err: 'Data not found'});
+    }
+})
 //搜尋商品 (id)
 router.get('/item/:id', async(req, res) => {
     try{
