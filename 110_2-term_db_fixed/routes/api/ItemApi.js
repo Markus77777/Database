@@ -93,7 +93,7 @@ const Item = {
     //刪除商品 (用i_id)
     deleteItem: async(id) => {
         try {
-            const sql = ` ;`
+            const sql = `DELETE FROM ${tblName} WHERE i_id=${id} `
             const [rs, flds] = await myConnection.query(sql);
             return 1;
         } catch (err) {
@@ -113,7 +113,26 @@ const Item = {
           return -1;
         }
       },
-    
+    //修改商品資料
+    updateItem: async(oData) => {
+        try {
+            const sql = `UPDATE ${tblName} SET i_name=?, i_price=?, i_quantity=?, i_pict=?, description=? WHERE i_id=? `;
+            const [rs ,flds]=await myConnection.query(sql,[
+                oData.i_name,
+                oData.i_price,
+                oData.i_quantity,
+                oData.i_pict,
+                oData.description,
+                oData.i_id,  
+            ]);
+            console.log(rs);
+            return rs.affectedRows;
+        }catch (err) {
+            console.log(err);
+            return -1;
+        }
+    },
+
 };
 
 module.exports = Item ;

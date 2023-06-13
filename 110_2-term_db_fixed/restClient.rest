@@ -9,6 +9,22 @@ GET http://localhost:5000/api/members/sidebar/2/2
 ####搜尋商品
 GET http://localhost:5000/api/members/itemName/RTX
 
+###隨機列出5樣商品
+GET http://localhost:5000/api/members/random5
+
+###修改商品
+PUT http://localhost:5000/api/members/updateItem
+Content-Type: application/json
+
+{
+    "i_name":"test64",
+    "i_price":64,
+    "i_quantity":100,
+    "i_pict":"123",
+    "description":"nmsl",
+    "i_id":65
+    
+}
 
 ############新增商品
 POST http://localhost:5000/api/members/item
@@ -34,7 +50,7 @@ Content-Type: application/json
 }
 
 ###刪除商品
-DELETE  http://localhost:5000/api/members/item/62
+DELETE  http://localhost:5000/api/members/item/64
 
 
 ######登入後取得會員資料

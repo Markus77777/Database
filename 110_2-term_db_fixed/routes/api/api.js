@@ -131,6 +131,33 @@ router.get('/random5', async (req, res) => {
       return;
     }
   });
+
+//修改商品
+
+  router.put('/updateItem', async(req, res) => {
+    const theMember = await Item.updateItem(req.body.i_id*1);
+    if(theMember.length==0){
+        res.status(400).json ({msg:"找不到此商品無法修改"});
+        return;
+    }
+    
+    let aMember = {
+        i_name:req.body.i_name ? req.body.i_name : theMember[0].i_name,
+        i_price:req.body.i_price ? req.body.i_price : theMember[0].i_price,
+        i_quantity:req.body.i_quantity ? req.body.i_quantity : theMember[0].i_quantity,
+        i_pict:req.body.i_pict ? req.body.i_pict : theMember[0].i_pict,
+        description:req.body.description ? req.body.description : theMember[0].description,
+        i_id: req.body.i_id*1,
+    };
+    console.log("from put aMember:" , aMember);
+    const rows = await Item.updateItem(aMember);
+    if(rows==1){
+        res.json({msg:"商品已更新", ...aMember});
+    }else{
+        res.status(400).json({msg:"更新出現錯誤"})
+    }
+    
+});
 //===============================================================================
 //CUSTOMER
 
