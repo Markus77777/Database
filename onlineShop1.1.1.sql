@@ -45,20 +45,20 @@ INSERT INTO `brand` (`bname`, `b_id`, `b_addr`, `b_email`) VALUES
 -- 傾印  資料表 onlineshop.customer 結構
 CREATE TABLE IF NOT EXISTS `customer` (
   `c_id` int NOT NULL AUTO_INCREMENT,
+  `cname` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `c_password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `cname` varchar(8) COLLATE utf8mb4_general_ci NOT NULL,
   `addr` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `c_email` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `c_birth` varchar(16) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.customer 的資料：~3 rows (近似值)
 DELETE FROM `customer`;
-INSERT INTO `customer` (`c_id`, `c_password`, `cname`, `addr`, `c_email`, `c_birth`) VALUES
+INSERT INTO `customer` (`c_id`, `cname`, `c_password`, `addr`, `c_email`, `c_birth`) VALUES
 	(1, 'test1', 'test1', '苗栗縣', 'chang003@gmail.com', '1990-9-9'),
-	(2, 'test2', 'test2', '苗栗縣', 'lee04@gmail.com', '2000-02-02'),
-	(3, 'test3', 'cheung1', '你家', 'cheung1@gmail.com', '1998-01-01');
+	(2, 'test2', 'test6', '苗栗市', '123456asds46@gmail.com', '2022-01-10'),
+	(3, 'cheung1', 'test3', '你家', 'cheung1@gmail.com', '1998-01-01');
 
 -- 傾印  資料表 onlineshop.item 結構
 CREATE TABLE IF NOT EXISTS `item` (
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   KEY `t_id` (`t_id`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`b_id`) REFERENCES `brand` (`b_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`t_id`) REFERENCES `type` (`t_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.item 的資料：~60 rows (近似值)
 DELETE FROM `item`;
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `record` (
   KEY `cus_id` (`cus_id`),
   CONSTRAINT `record_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`i_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `record_ibfk_2` FOREIGN KEY (`cus_id`) REFERENCES `customer` (`c_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在傾印表格  onlineshop.record 的資料：~2 rows (近似值)
 DELETE FROM `record`;
@@ -172,11 +172,11 @@ CREATE TABLE IF NOT EXISTS `type` (
 -- 正在傾印表格  onlineshop.type 的資料：~6 rows (近似值)
 DELETE FROM `type`;
 INSERT INTO `type` (`tname`, `t_id`) VALUES
-	('鞋類', 1),
-	('衣服', 2),
-	('褲子', 3),
-	('襪子', 4),
-	('顯示卡', 5),
+	('Shoes', 1),
+	('Clothes', 2),
+	('Pants', 3),
+	('Sock', 4),
+	('GPU', 5),
 	('CPU', 6);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
